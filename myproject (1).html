@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript</title>
+    <style>
+      .container{
+    background-color: rgb(208, 255, 0);
+    width:600px;
+    min-height: 600px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px goldenrod;
+  margin: 100px auto;
+}
+
+.input-task{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+
+}
+.button-task{
+    background-color: rgb(0, 0, 0);
+    padding: 5px 10px;
+    color: rgb(241, 228, 40);
+    outline: none;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px rgb(0, 0, 0);
+    transition: 0.5%; 
+    font-size: 10px;
+    margin-left: 30px ;
+}
+.button-task:hover{
+    background-color: rgb(10, 9, 1);
+    box-shadow: 2px 2px 4px rgb(0, 0, 0);
+}
+.input-task input{
+    width: 70%;
+    padding: 10px;
+    border-radius:5px;
+    font-size: 10px;
+}
+.task{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(60, 255, 0);
+    height: 40px;
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 15px;
+    box-shadow: 0 0 15px 5px rgb(0, 0, 0);
+    padding:5px 15px;
+}
+.clS button{
+    background-color: rgb(0, 0, 0);
+    padding: 5px 10px;
+    color: rgb(241, 228, 40);
+    outline: none;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px rgb(0, 0, 0);
+    transition: 0.5%; 
+    font-size: 10px;
+    margin-left: 30px ;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form>
+            <div class="input-task">
+                <input id="text" type="text" 
+                placeholder="Какие у вас планы на завтра?" autocomplete="off">
+                <button class="button-task" onclick="cyxapiki()">Добавить</button>
+            <div class="clS">
+                <button onclick="clS()" >удалить список</button>
+            </div>
+            </div>
+        </form>
+        <div class="tasks" id="tasks">
+        </div>
+    </div>
+    <script>
+ function cyxapiki() {
+    let text = document.getElementById('text').value;
+    let id = localStorage.length + 1;
+
+    localStorage.setItem(id, text)
+ }
+
+function clS(){
+    localStorage.clear()
+}
+
+ function showtasks(){
+    for(let i = 1; i <= localStorage.length; i++){
+
+        let text = localStorage.getItem(i)
+
+        let task = document.createElement('div')
+        let task_text = document.createElement('div')
+        let task_id = document.createElement('div')
+
+        task.className = 'task';
+        task_text.className = 'task-text'
+        task_id.className = 'task-id'
+
+        task_text.innerHTML = text;
+        task_id.innerHTML = i;
+        task.innerHTML =  task_text.outerHTML + task_id.outerHTML;
+        document.getElementById('tasks').appendChild(task)
+    }
+ }
+ showtasks()
+</script>
+</body>
+</html>
